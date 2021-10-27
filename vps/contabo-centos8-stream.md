@@ -8,7 +8,7 @@ ssh root@vps
 
 # Update the system
 yum update -y
-yum install -y tar git epel-release
+yum install -y tar epel-release git jq tcl
 
 # Check Time Service
 timedatectl set-local-rtc 0

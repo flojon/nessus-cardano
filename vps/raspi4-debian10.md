@@ -100,7 +100,7 @@ chmod 666 /dev/kvm
 shutdown -r now
 ```
 
-### Swap setup
+### Setup a Swap Disk
 
 ```
 sudo dphys-swapfile swapoff
@@ -110,6 +110,23 @@ sudo cat /etc/dphys-swapfile | grep CONF
 sudo dphys-swapfile setup
 sudo dphys-swapfile swapon
 free -h
+```
+
+### Setup a ZRam
+
+https://ikarus.sg/using-zram-to-get-more-out-of-your-raspberry-pi/
+
+```
+git clone https://github.com/StuartIanNaylor/zram-swap-config ~/git/zram-swap-config \
+&& cd ~/git/zram-swap-config && git checkout 92be000 \
+&& sudo ./install.sh \
+&& cat /etc/zram-swap-config.conf
+
+MEM_FACTOR=60 \
+&& sudo sed -i "s/MEM_FACTOR=40/MEM_FACTOR=$MEM_FACTOR/" /etc/zram-swap-config.conf \
+&& cat /etc/zram-swap-config.conf | grep "MEM_FACTOR="
+
+systemctl status zram-swap-config
 ```
 
 ### Install Nix
